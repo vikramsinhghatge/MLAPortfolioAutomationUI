@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RequestComponent } from './pages/home/request/request.component';
 import { WaitingListComponent } from './pages/home/waitingList/waitingList.component';
+import { CalendarComponent } from './pages/home/calendar/calendar.component';
+
 import { Dashboard2Component } from './pages/dashboard_2/dashboard_2.component';
 import { Dashboard3Component } from './pages/dashboard_3/dashboard_3.component';
 import { Dashboard4Component } from './pages/dashboard_4/dashboard_4.component';
@@ -60,6 +62,8 @@ const appRoutes: Routes = [
         },
         { path: 'request', component: RequestComponent},
         { path: 'waitingList', component: WaitingListComponent},
+        { path: 'calendar', component: CalendarComponent},
+
 
         { path: 'dashboard_2', component: Dashboard2Component},
         { path: 'dashboard_3', component: Dashboard3Component},
@@ -115,7 +119,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes) ],
   exports: [ RouterModule ],
   declarations: [
-    HomeComponent, RequestComponent, WaitingListComponent, Dashboard2Component, Dashboard3Component, Dashboard4Component, Dashboard5Component, Datatable,
+    HomeComponent, RequestComponent, WaitingListComponent, CalendarComponent, Dashboard2Component, Dashboard3Component, Dashboard4Component, Dashboard5Component, Datatable,
     ChartJS, Peity, SparklineComponent, MorrisChartComponent, IconsComponent, WidgetsComponent,
     Mailbox, MailView, MailCompose, Blog, Article, EcommerceProdutsBoard, EcommerceProdutsList, EcommerceProdutsEdit,
     InvoiceComponent, TimelineComponent, FaqComponent, ProfileComponent, SearchComponent,
