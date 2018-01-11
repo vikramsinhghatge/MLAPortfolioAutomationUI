@@ -1,9 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule }   from '@angular/http';
+//import { HttpModule }   from '@angular/http';
+
+import {BaseRequestOptions, Http} from "@angular/http";
+
+import {MockBackend} from "@angular/http/testing";
 
 import { AppComponent } from './app.component';
 import { LoginService } from './pages/login/login.service';
+
 
 // Import layouts
 import {
@@ -44,12 +49,21 @@ import { AppRoutingModule } from './app.routing';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    //HttpModule,
     AppRoutingModule
   ],
   providers: [
-    LoginService
+    LoginService,
+    MockBackend,
+    BaseRequestOptions,
+    {
+    provide: Http,
+    deps: [MockBackend, BaseRequestOptions],
+        useFactory: mockBackEndFun()
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppMockModule { }
+
+export function mockBackEndFun(backend: MockBackend, options: BaseRequestOptions) { return new Http(backend, options);}

@@ -112,7 +112,8 @@ const appRoutes: Routes = [
   imports: [
     FormsModule,
     CommonModule,
-    RouterModule.forRoot(appRoutes) ],
+    RouterModule.forRoot(appRoutes)
+   ],
   exports: [ RouterModule ],
   declarations: [
     HomeComponent, RequestComponent, WaitingListComponent, Dashboard2Component, Dashboard3Component, Dashboard4Component, Dashboard5Component, Datatable,

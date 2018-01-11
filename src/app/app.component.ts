@@ -4,20 +4,26 @@ import { Response} from '@angular/http';
 
 import {UIService} from './services/ui.service';
 
+import { MockLoginService } from './pages/login/login.service.mock';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [UIService]
+  providers: [UIService, MockLoginService]
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
   loading = true;
   constructor(
-    private UIService: UIService, 
-    private elementRef: ElementRef, 
+    private UIService: UIService,
+    private elementRef: ElementRef,
     private router: Router,
-  ) 
+
+    private mockLoginService: MockLoginService
+  )
   {
+    this.mockLoginService.start();
+
     this.router.events.subscribe(event => {
       if(event instanceof NavigationStart) {
         this.loading = true;

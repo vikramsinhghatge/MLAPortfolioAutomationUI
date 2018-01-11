@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
+import { User } from './user.model';
+import { LoginService } from './login.service';
+
 declare var jQuery:any;
 declare var $:any;
 
@@ -12,19 +16,24 @@ declare var $:any;
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   router: Router;
+  errorLogin: boolean = false;
 
-  constructor(_router: Router) {
+  constructor(private loginService: LoginService, _router: Router) {
     this.router = _router;
   }
 
-  loginForm = {
-    name: '',
-    password: ''
+  loginForm:User = {
+    username: '',
+    userPassword: ''
   }
   onSubmit() {
-    //alert("form submit" + JSON.stringify(this.loginForm));
-    //this.router.navigateByUrl('/home');
-    this.router.navigate(['/request']);
+    this.loginService.doLogin(this.loginForm)
+	     .subscribe( user => {
+
+          this.router.navigate(['/request']);
+			 },
+       error => this.errorLogin = true);
+       /*error => this.errorMessage = <any>error);*/
   }
 
   ngAfterViewInit() {
