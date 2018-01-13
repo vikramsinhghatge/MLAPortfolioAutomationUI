@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 declare var jQuery:any;
 declare var $:any;
@@ -7,12 +7,12 @@ declare var toastr: any;
 
 @Injectable()
 export class UIService {
-    constructor(private http: Http){ }
-    
+    constructor(private http: HttpClient){ }
+
     activate() {
 	    // SIDEBAR ACTIVATE METISMENU
 		$(".metismenu").metisMenu();
-        
+
         // Tooltip
         $('[data-toggle="tooltip"]').tooltip();
 
@@ -29,9 +29,9 @@ export class UIService {
         });
 
     }
-    
+
     // SEARCH BAR ACTION
-    
+
     toggleSearch() {
         $('.search-top-bar').backdrop().find('.search-input').focus();
     }
@@ -150,7 +150,7 @@ export class UIService {
             $('#timeout-reset-box').show();
             $('#timeout-activate-box').hide();
             $( document ).idleTimer( count * 60000 );
-            
+
             setTimeout(function(){
                 $('.timeout-toggler').addClass('active');
             },(count-1) * 60000);
@@ -196,9 +196,9 @@ export class UIService {
         $(event.target).find('i').toggleClass('fa-expand').toggleClass('fa-compress');
     }
 
-    
 
-    
+
+
     hideBackdrop() {
         $('body').removeClass('has-backdrop');
         $('.shined').removeClass('shined');

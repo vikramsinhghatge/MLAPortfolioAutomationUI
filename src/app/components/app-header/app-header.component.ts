@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {UIService} from '../../services/ui.service';
+import { LoginService } from '../../pages/login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: '[app-header]',
@@ -9,7 +11,14 @@ import {UIService} from '../../services/ui.service';
 export class AppHeader {
 
     constructor(
-        public UIService: UIService, 
+        public UIService: UIService,
+        private loginService: LoginService,
+        private router: Router
     ) { }
+
+    logout(){
+        this.loginService.logout();
+        this.router.navigate(['/login']);
+    }
 
 }

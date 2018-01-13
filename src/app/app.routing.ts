@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from './utils/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { RequestComponent } from './pages/home/request/request.component';
 import { WaitingListComponent } from './pages/home/waitingList/waitingList.component';
@@ -50,20 +51,17 @@ import {
 
 
 const appRoutes: Routes = [
-    {
-      path: '', component: LoginComponent
-    },
+  // otherwise redirect to home
+    { path: '', component: LoginComponent },
 
     {
       path: '',
       component: FullLayout,
       children: [
-        { path: 'home', component: HomeComponent
-        },
-        { path: 'request', component: RequestComponent},
-        { path: 'waitingList', component: WaitingListComponent},
-        { path: 'calendar', component: CalendarComponent},
-
+        { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+        { path: 'request', component: RequestComponent, canActivate: [AuthGuard] },
+        { path: 'waitingList', component: WaitingListComponent, canActivate: [AuthGuard] },
+        { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
 
         { path: 'dashboard_2', component: Dashboard2Component},
         { path: 'dashboard_3', component: Dashboard3Component},

@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule }   from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+import { AuthGuard } from './utils/auth.guard';
+import { JwtInterceptor } from './utils/jwt.interceptor';
 import { AppComponent } from './app.component';
+import { LoginService } from './pages/login/login.service';
 
 // Import layouts
 import {
@@ -43,10 +47,18 @@ import { AppRoutingModule } from './app.routing';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    LoginService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

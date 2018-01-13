@@ -4,16 +4,19 @@
     <div class="text-center m-t-10"><span class="login-img"><i class="ti-user"></i></span></div>
     <h3 class="login-title">Log in</h3>
     <div class="form-group" [ngClass]="{ 'has-error': uname.invalid && (uname.dirty || uname.touched) }">
-      <input class="form-control" type="text" name="username" placeholder="Username" [(ngModel)]="loginForm.name" #uname="ngModel" required>
+      <input class="form-control" type="text" name="username" placeholder="Username" [(ngModel)]="model.username" #uname="ngModel" required>
       <div *ngIf="uname.invalid && (uname.dirty || uname.touched)">
         Name is required.
       </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': pwd.invalid && (pwd.dirty || pwd.touched) }">
-      <input class="form-control" type="password" name="password" [(ngModel)]="loginForm.password" #pwd="ngModel" required placeholder="Password">
+      <input class="form-control" type="password" name="password" [(ngModel)]="model.password" #pwd="ngModel" required placeholder="Password">
       <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
         Password is required.
       </div>
+    </div>
+    <div class="form-group" *ngIf="errorLogin">
+      <div class="alert alert-danger">The credentials you entered are incorrect.</div>
     </div>
     <div class="form-group">
       <button class="btn btn-info btn-block" type="submit" [disabled]="form.invalid">Login</button>

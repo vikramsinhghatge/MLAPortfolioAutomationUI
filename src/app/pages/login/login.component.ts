@@ -1,5 +1,9 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
+
+import { User } from './user.model';
+import { LoginService } from './login.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -11,28 +15,37 @@ declare var $:any;
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  router: Router;
+  model: any = {};
+  returnUrl: string;
+  errorLogin: boolean = false;
 
-  constructor(_router: Router) {
-    this.router = _router;
-  }
+  constructor(private loginService: LoginService, private route: ActivatedRoute, private router: Router) {}
 
-  loginForm = {
-    name: '',
-    password: ''
-  }
+  ngOnInit() {
+        // reset login status
+        this.loginService.logout();
+
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/request';
+
+        $('body').css({'background-color':'#2CC4CB', 'background-image':'linear-gradient(135deg,#2CC4CB,#18C5A9)'});
+    }
+
   onSubmit() {
-    //alert("form submit" + JSON.stringify(this.loginForm));
-    //this.router.navigateByUrl('/home');
-    this.router.navigate(['/request']);
+    this.loginService.doLogin(this.model.username, this.model.password)
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    this.errorLogin = true;
+                });
   }
 
   ngAfterViewInit() {
 
   }
-  ngOnInit(): void {
-      $('body').css({'background-color':'#2CC4CB', 'background-image':'linear-gradient(135deg,#2CC4CB,#18C5A9)'});
-  }
+
   ngOnDestroy() {
       $('body').css({'background-color':'', 'background-image':''});
   }
