@@ -5,6 +5,7 @@ import { AuthGuard } from './utils/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { RequestComponent } from './pages/home/request/request.component';
 import { WaitingListComponent } from './pages/home/waitingList/waitingList.component';
+import { EditDataComponent } from './pages/home/editData/editData.component';
 import { CalendarComponent } from './pages/home/calendar/calendar.component';
 
 import { Dashboard2Component } from './pages/dashboard_2/dashboard_2.component';
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
         { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
         { path: 'request', component: RequestComponent, canActivate: [AuthGuard] },
         { path: 'waitingList', component: WaitingListComponent, canActivate: [AuthGuard] },
+        { path: 'editData', component: EditDataComponent, canActivate: [AuthGuard] },
         { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
 
         { path: 'dashboard_2', component: Dashboard2Component},
@@ -117,7 +119,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes) ],
   exports: [ RouterModule ],
   declarations: [
-    HomeComponent, RequestComponent, WaitingListComponent, CalendarComponent, Dashboard2Component, Dashboard3Component, Dashboard4Component, Dashboard5Component, Datatable,
+    HomeComponent, RequestComponent, WaitingListComponent, EditDataComponent, CalendarComponent, Dashboard2Component, Dashboard3Component, Dashboard4Component, Dashboard5Component, Datatable,
     ChartJS, Peity, SparklineComponent, MorrisChartComponent, IconsComponent, WidgetsComponent,
     Mailbox, MailView, MailCompose, Blog, Article, EcommerceProdutsBoard, EcommerceProdutsList, EcommerceProdutsEdit,
     InvoiceComponent, TimelineComponent, FaqComponent, ProfileComponent, SearchComponent,
